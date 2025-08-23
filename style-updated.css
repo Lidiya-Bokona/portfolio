@@ -447,27 +447,29 @@ a[href^="mailto:"]:hover {
     background-clip: text;
 }
 
-/* About Section - Redesigned */
+/* About Section - Updated to match education section */
 #about-me {
-    background: linear-gradient(135deg, rgba(10, 10, 10, 0.95), rgba(20, 20, 20, 0.95));
-    border-radius: var(--radius-xl);
-    margin: var(--space-2xl) var(--space-md);
-    padding: var(--space-2xl);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(147, 112, 219, 0.1);
     position: relative;
+    padding: 100px 0;
+    background: #000000;
     overflow: hidden;
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    backdrop-filter: none;
 }
 
 #about-me::before {
     content: '';
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(147, 112, 219, 0.1) 0%, transparent 70%);
-    animation: rotateGradient 20s linear infinite;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(160, 130, 221, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(160, 130, 221, 0.1) 0%, transparent 50%);
+    pointer-events: none;
 }
 
 @keyframes rotateGradient {
@@ -591,7 +593,69 @@ a[href^="mailto:"]:hover {
     animation-delay: 4s;
 }
 
-/* Skills Showcase */
+/* Skills Showcase - Updated to match education section */
+#my-skills {
+    position: relative;
+    padding: 100px 0;
+    background: #000000;
+    overflow: hidden;
+}
+
+#my-skills::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(160, 130, 221, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(160, 130, 221, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* Skills Section - Updated to match education section */
+#skills {
+    position: relative;
+    padding: 100px 0;
+    background: #000000;
+    overflow: hidden;
+}
+
+#skills::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(160, 130, 221, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(160, 130, 221, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* Projects Section - Updated to match education section */
+#projects {
+    position: relative;
+    padding: 100px 0;
+    background: #000000;
+    overflow: hidden;
+}
+
+#projects::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(160, 130, 221, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(160, 130, 221, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
 .skills-showcase {
     margin: var(--space-2xl) 0;
 }
@@ -806,7 +870,27 @@ a[href^="mailto:"]:hover {
     }
 }
 
-/* Journey Timeline */
+/* Journey Timeline - Updated to match education section */
+#my-journey {
+    position: relative;
+    padding: 100px 0;
+    background: #000000;
+    overflow: hidden;
+}
+
+#my-journey::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(160, 130, 221, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(160, 130, 221, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
 .journey-title {
     text-align: center;
     margin-bottom: var(--space-2xl);
@@ -947,7 +1031,27 @@ a[href^="mailto:"]:hover {
     }
 }
 
-/* Projects */
+/* Projects - Updated to match education section */
+#my-projects {
+    position: relative;
+    padding: 100px 0;
+    background: #000000;
+    overflow: hidden;
+}
+
+#my-projects::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(160, 130, 221, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(160, 130, 221, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
@@ -1095,7 +1199,27 @@ a[href^="mailto:"]:hover {
     box-shadow: 0 4px 15px rgba(147, 112, 219, 0.4);
 }
 
-/* Contact Section */
+/* Contact Section - Updated to match education section */
+#contact {
+    position: relative;
+    padding: 100px 0;
+    background: #000000;
+    overflow: hidden;
+}
+
+#contact::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(160, 130, 221, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(160, 130, 221, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
 .contact-wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;
