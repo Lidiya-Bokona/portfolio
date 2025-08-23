@@ -14,7 +14,7 @@
     <header>
         <nav>
             <a href="#" class="logo">Lidiya</a>
-            <a href="#" class="active">Home</a>
+<a href="index-enhanced.html" class="active">Home</a>
             <a href="#about-me">About</a>
             <a href="#my-journey">Journey</a>
             <a href="#education">Education</a>
@@ -51,62 +51,31 @@
         </div>
     </section>
 
-    <section id="about-me" class="section">
+    <section id="about-me" class="section">  
         <div class="container">
-            <h2>About Me</h2>
-            <div class="about-content">
-                <p class="about-intro">
-                    👋 Hi there! I'm <strong>Lidiya Bokona</strong><br>
-                    <strong>Pharmacy student by day. Developer by night. Tea-fueled every hour!</strong>
-                </p>
-                
-                <p>
-                    I'm a pharmacy student who loves creating exciting new software. I started my tech journey by learning about ethical hacking because I was curious. However, I soon discovered that I enjoy developing software that turns innovative ideas into useful tools for people.
-                </p>
-
-                <div class="about-cards-container">
-                    <!-- Interests Card -->
-                    <div class="about-card">
-                        <div class="card-header">
-                            <h3>What Sparks My Interest</h3>
-                        </div>
-                        <div class="card-content">
-                            <div class="interest-item">
-                                <i class="fas fa-shield-alt"></i>
-                                <span><strong>Ethical Hacker Turned Builder:</strong> I loved the thrill of hacking; now I create instead!</span>
-                            </div>
-                            <div class="interest-item">
-                                <i class="fab fa-python"></i>
-                                <span><strong>Python Developer:</strong> Flask is my cozy coding corner, where magic happens.</span>
-                            </div>
-                            <div class="interest-item">
-                                <i class="fas fa-globe"></i>
-                                <span><strong>Real-World Problem Solver:</strong> Obsessed with using technology to tackle everyday challenges.</span>
-                            </div>
-                            <div class="interest-item">
-                                <i class="fas fa-rocket"></i>
-                                <span><strong>Exploring New Frontiers:</strong> Currently diving into prompt engineering, LLMs, and blockchain.</span>
-                            </div>
-                            <div class="interest-item">
-                                <i class="fab fa-telegram"></i>
-                                <span><strong>Join My Journey:</strong> I share my progress on <a href="https://t.me/tech_world_o1" target="_blank">Telegram</a> — come say hi!</span>
-                            </div>
-                        </div>
+            <h2 class="section-title">About Me</h2>
+            
+            <div class="about-hero">
+                <div class="about-content">
+                    <div class="about-intro">
+                        <h3>👋 Hi there! I'm <span class="gradient-text">Lidiya Bokona</span></h3>
+                        <p class="tagline">Pharmacy student by day. Developer by night. Tea-fueled every hour! 🍵</p>
+                        
+                        <p class="about-description">
+                            I'm a pharmacy student who loves creating exciting new software. I started my tech journey by learning about ethical hacking because I was curious. However, I soon discovered that I enjoy developing software that turns innovative ideas into useful tools for people.
+                        </p>
                     </div>
 
-                    <!-- Buy Me Tea Card -->
-                    <div class="about-card">
-                        <div class="card-header">
-                            <h3>Buy Me Tea</h3>
-                        </div>
-                        <div class="card-content">
-                            <p>
-                                If you've enjoyed my work, my words, or just want to fuel the next idea — your support keeps the kettle boiling and the ideas flowing.
-                            </p>
-                            <a href="https://ye-buna.com/lidiya813?ref=ye_buna" target="_blank" class="tea-button">
-                                <i class="fas fa-mug-hot"></i>
-                                Buy Me Tea
-                            </a>
+                    <div class="about-visual">
+                        <div class="profile-illustration">
+                            <div class="illustration-placeholder">
+                                <i class="fas fa-laptop-code"></i>
+                                <div class="floating-elements">
+                                    <div class="floating-element element-1">🐍</div>
+                                    <div class="floating-element element-2">🔐</div>
+                                    <div class="floating-element element-3">🚀</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -157,8 +126,7 @@
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-content">
-                        <h3>Present</h3>
-                        <p><strong>Continuously learning & building</strong></p>
+                        <h3>Present</h3>p><strong>Continuously learning & building</strong></p>
                     </div>
                 </div>
             </div>
@@ -283,70 +251,6 @@
             </div>
         </div>
     </section>
-
-
-    <div class="container">
-        <h2>Lesson of the Day</h2>
-        <p>Every day, I share what life has taught me through personal experiences and insights. Feel free to browse through my lessons.</p>
-        <div class="lesson-container" id="lessonContainer">
-          <p>⏳ Loading lessons...</p>
-        </div>
-      </div>
-    </section>
-  
-    <!-- PROJECTS -->
-    <section id="projects" class="section">
-      <!-- your existing projects code here -->
-    </section>
-  
-    <!-- CONTACT -->
-    <section id="contact" class="section">
-      <!-- your existing contact code here -->
-    </section>
-  
-    <script>
-      async function loadLessons() {
-        const container = document.getElementById("lessonContainer");
-        try {
-          // Use AllOrigins proxy to avoid CORS error
-          const url = "https://api.rss2json.com/v1/api.json?rss_url=https://t.me/s/tech_world_o1";
-          const proxy = "https://api.allorigins.win/get?url=" + encodeURIComponent(url);
-  
-          const res = await fetch(proxy);
-          const data = await res.json();
-          const feed = JSON.parse(data.contents);
-  
-          const lessons = feed.items.filter(
-            item =>
-              item.title.includes("#Lesson_of_the_day") ||
-              item.description.includes("#Lesson_of_the_day")
-          );
-  
-          container.innerHTML = "";
-  
-          if (lessons.length === 0) {
-            container.innerHTML = "<p>😕 No lessons found yet.</p>";
-            return;
-          }
-  
-          lessons.forEach(lesson => {
-            const div = document.createElement("div");
-            div.className = "lesson-item";
-            div.innerHTML = `
-              <h3>${lesson.title}</h3>
-              <p>${lesson.description}</p>
-              <small>${new Date(lesson.pubDate).toDateString()}</small>
-            `;
-            container.appendChild(div);
-          });
-        } catch (err) {
-          console.error("Error loading lessons:", err);
-          container.innerHTML = "<p>⚠️ Could not load lessons right now.</p>";
-        }
-      }
-      loadLessons();
-    </script>
-  </body>
 
     <section id="projects" class="section">
         <div class="container">
@@ -514,4 +418,5 @@
     </section>
 
     <script src="script-enhanced.js"></script>
+</body>
 </html>

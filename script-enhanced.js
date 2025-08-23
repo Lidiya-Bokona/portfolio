@@ -1,8 +1,48 @@
-// Enhanced JavaScript for Professional Portfolio
+document.addEventListener('DOMContentLoaded', () => {
+    // Enhanced JavaScript for Professional Portfolio
+
+    // Function to set active link based on scroll position
+    function setActiveLink() {
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a');
+
+        let currentSection = '';
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+
+            if (pageYOffset >= sectionTop - sectionHeight / 3) {
+                currentSection = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${currentSection}`) {
+                link.classList.add('active');
+            }
+        });
+    }
+
+    // Get nav links after DOM is loaded
+    const navLinks = document.querySelectorAll('nav a');
+
+    // Event listeners for scroll and click
+    window.addEventListener('scroll', setActiveLink);
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            setTimeout(setActiveLink, 100); // Delay to allow scroll to complete
+        });
+    });
+
+    // Call the function on page load
+    setActiveLink();
+});
 
 // Enhanced typing animation with more dynamic effects
 const typingText = document.querySelector('.typing-text span');
-const words = ['Software Developer', 'Pharmacy Student', 'Social Media Manager'];
+const words = ['Software Developer', 'Pharmacy Student', 'Social Media Manager', 'Blogger'];
 let wordIndex = 0;
 let charIndex = 0;
 let isDeleting = false;
@@ -107,6 +147,185 @@ document.querySelectorAll('.education-card').forEach(card => {
     card.style.opacity = '1';
     card.style.transform = 'translateY(0)';
 });
+
+// Enhanced About Me Section Animations
+const aboutMeObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            // Animate skill cards with staggered delay
+            const skillCards = document.querySelectorAll('.skill-card');
+            skillCards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                    card.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+                }, index * 150);
+            });
+            
+            // Animate profile illustration
+            const illustration = document.querySelector('.illustration-placeholder');
+            if (illustration) {
+                setTimeout(() => {
+                    illustration.style.transform = 'scale(1.05)';
+                    illustration.style.boxShadow = '0 0 30px rgba(147, 112, 219, 0.4)';
+                }, 800);
+            }
+        }
+    });
+}, { threshold: 0.3 });
+
+// Observe About Me section
+const aboutMeSection = document.querySelector('#about-me');
+if (aboutMeSection) {
+    aboutMeObserver.observe(aboutMeSection);
+}
+
+// Initialize skill cards with hidden state
+document.querySelectorAll('.skill-card').forEach(card => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(30px)';
+});
+
+// Enhanced hover effects for skill cards
+document.querySelectorAll('.skill-card').forEach(card => {
+    card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-12px) scale(1.02)';
+        this.style.boxShadow = '0 25px 50px rgba(147, 112, 219, 0.3)';
+    });
+    
+    card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
+        this.style.boxShadow = '0 20px 40px rgba(147, 112, 219, 0.2)';
+    });
+});
+
+// Enhanced floating elements animation
+function animateFloatingElements() {
+    const elements = document.querySelectorAll('.floating-element');
+    elements.forEach((element, index) => {
+        element.style.animationDelay = `${index * 2}s`;
+        element.style.animation = `float ${6 + index}s ease-in-out infinite`;
+    });
+}
+
+// Enhanced scroll animations for About Me section
+function createAboutMeScrollAnimations() {
+    const aboutContent = document.querySelector('.about-content');
+    const skillsShowcase = document.querySelector('.skills-showcase');
+    
+    if (aboutContent && skillsShowcase) {
+        aboutContent.style.opacity = '0';
+        aboutContent.style.transform = 'translateX(-30px)';
+        aboutContent.style.transition = 'all 0.8s ease';
+        
+        skillsShowcase.style.opacity = '0';
+        skillsShowcase.style.transform = 'translateX(30px)';
+        skillsShowcase.style.transition = 'all 0.8s ease 0.3s';
+        
+        const aboutScrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    aboutContent.style.opacity = '1';
+                    aboutContent.style.transform = 'translateX(0)';
+                    
+                    setTimeout(() => {
+                        skillsShowcase.style.opacity = '1';
+                        skillsShowcase.style.transform = 'translateX(0)';
+                    }, 300);
+                }
+            });
+        }, { threshold: 0.2 });
+        
+        aboutScrollObserver.observe(aboutMeSection);
+    }
+}
+
+// Enhanced CTA button animations
+function enhanceCTAButtons() {
+    const ctaButtons = document.querySelectorAll('.cta-buttons .btn');
+    ctaButtons.forEach((btn, index) => {
+        btn.style.opacity = '0';
+        btn.style.transform = 'translateY(20px)';
+        btn.style.transition = `all 0.6s ease ${index * 0.2}s`;
+        
+        const ctaObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        btn.style.opacity = '1';
+                        btn.style.transform = 'translateY(0)';
+                    }, index * 200);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        ctaObserver.observe(btn);
+    });
+}
+
+// Enhanced typing animation for tagline
+function enhanceTaglineAnimation() {
+    const tagline = document.querySelector('.tagline');
+    if (tagline) {
+        tagline.style.opacity = '0';
+        tagline.style.transform = 'translateY(20px)';
+        tagline.style.transition = 'all 0.8s ease 0.5s';
+        
+        const taglineObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        tagline.style.opacity = '1';
+                        tagline.style.transform = 'translateY(0)';
+                    }, 500);
+                }
+            });
+        }, { threshold: 0.3 });
+        
+        taglineObserver.observe(tagline);
+    }
+}
+
+// Enhanced gradient animation for section title
+function enhanceSectionTitleAnimation() {
+    const sectionTitle = document.querySelector('.section-title');
+    if (sectionTitle) {
+        sectionTitle.style.backgroundSize = '200% 200%';
+        sectionTitle.style.animation = 'gradientShift 3s ease-in-out infinite';
+        
+        // Add gradient animation keyframes
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes gradientShift {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
+            }
+        `;
+        document.head.appendChild(style);
+    }
+}
+
+// Enhanced mobile menu for About Me section
+function enhanceMobileMenu() {
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', () => {
+            const nav = document.querySelector('nav');
+            nav.classList.toggle('mobile-open');
+        });
+    }
+}
+
+// Initialize all enhanced animations
+function initEnhancedAnimations() {
+    animateFloatingElements();
+    createAboutMeScrollAnimations();
+    enhanceCTAButtons();
+    enhanceTaglineAnimation();
+    enhanceSectionTitleAnimation();
+    enhanceMobileMenu();
+}
 
 // Enhanced timeline animation
 const timelineObserver = new IntersectionObserver((entries) => {
