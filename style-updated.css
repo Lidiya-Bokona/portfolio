@@ -1063,13 +1063,15 @@ a[href^="mailto:"]:hover {
     background: var(--bg-secondary);
     border-radius: var(--radius-lg);
     overflow: hidden;
-    box-shadow: var(--shadow-md);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(147, 112, 219, 0.1);
+    border: 1px solid rgba(147, 112, 219, 0.15);
     transition: var(--transition-normal);
 }
 
 .project-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(147, 112, 219, 0.25), 0 0 0 1px rgba(147, 112, 219, 0.2);
+    border-color: rgba(147, 112, 219, 0.3);
 }
 
 .project-image-container {
@@ -1413,6 +1415,45 @@ a[href^="mailto:"]:hover {
     
     .contact-item strong,
     .contact-item a {
+        font-size: 1.3rem;
+    }
+}
+
+/* Footer Styling */
+footer {
+    background: var(--bg-secondary);
+    padding: var(--space-xl) 0;
+    text-align: center;
+    border-top: 1px solid rgba(147, 112, 219, 0.2);
+    margin-top: var(--space-2xl);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-md);
+    text-align: center;
+}
+
+.footer-text {
+    color: var(--text-secondary);
+    font-size: 1.4rem;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.footer-text strong {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* Responsive Footer */
+@media (max-width: 768px) {
+    footer {
+        padding: var(--space-lg) 0;
+    }
+    
+    .footer-text {
         font-size: 1.3rem;
     }
 }
