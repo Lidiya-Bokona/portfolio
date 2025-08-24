@@ -584,6 +584,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.skill-card').forEach(card => {
         skillObserver.observe(card);
     });
+
+    // Enhanced Circular Icon Showcase Functionality
+    enhanceCircularIcons();
 });
 
 // Enhanced mobile menu toggle
@@ -688,3 +691,225 @@ function measurePerformance() {
 }
 
 measurePerformance();
+
+// Enhanced Circular Icon Showcase Functionality
+function enhanceCircularIcons() {
+    const iconItems = document.querySelectorAll('.icon-item');
+    const illustration = document.querySelector('.illustration-placeholder');
+    
+    if (!iconItems.length || !illustration) return;
+    
+    // Add enhanced hover effects with JavaScript
+    iconItems.forEach((icon, index) => {
+        // Enhanced hover effects
+        icon.addEventListener('mouseenter', function(e) {
+            // Scale up and add glow effect
+            this.style.transform = 'scale(1.3) translateY(-8px)';
+            this.style.boxShadow = '0 12px 30px rgba(147, 112, 219, 0.6)';
+            this.style.zIndex = '10';
+            
+            // Add pulse animation
+            this.style.animation = 'pulse 0.6s ease-in-out';
+            
+            // Highlight corresponding tooltip
+            const tooltip = this.nextElementSibling;
+            if (tooltip && tooltip.classList.contains('tooltip')) {
+                tooltip.style.opacity = '1';
+                tooltip.style.visibility = 'visible';
+                tooltip.style.transform = 'translateY(-5px)';
+            }
+        });
+        
+        icon.addEventListener('mouseleave', function() {
+            // Return to normal state
+            this.style.transform = 'scale(1) translateY(0)';
+            this.style.boxShadow = '0 4px 15px rgba(147, 112, 219, 0.4)';
+            this.style.zIndex = '3';
+            this.style.animation = '';
+            
+            // Hide tooltip
+            const tooltip = this.nextElementSibling;
+            if (tooltip && tooltip.classList.contains('tooltip')) {
+                tooltip.style.opacity = '0';
+                tooltip.style.visibility = 'hidden';
+                tooltip.style.transform = 'translateY(0)';
+            }
+        });
+        
+        // Click functionality - show detailed information
+        icon.addEventListener('click', function() {
+            const tooltipText = this.getAttribute('data-tooltip');
+            showIconDetails(tooltipText, this.querySelector('i').className);
+        });
+    });
+    
+    // Add rotation animation to the main circle on hover
+    illustration.addEventListener('mouseenter', function() {
+        this.style.transform = 'scale(1.05) rotate(5deg)';
+    });
+    
+    illustration.addEventListener('mouseleave', function() {
+        this.style.transform = 'scale(1.05) rotate(0deg)';
+    });
+    
+    // Add CSS for pulse animation
+    const pulseStyle = document.createElement('style');
+    pulseStyle.textContent = `
+        @keyframes pulse {
+            0% { transform: scale(1.3) translateY(-8px); }
+            50% { transform: scale(1.4) translateY(-10px); }
+            100% { transform: scale(1.3) translateY(-8px); }
+        }
+        
+        .icon-item:hover {
+            animation: pulse 2s ease-in-out infinite;
+        }
+    `;
+    document.head.appendChild(pulseStyle);
+    
+    // Add intersection observer for staggered icon animation
+    const iconObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'scale(1)';
+                    entry.target.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+                }, index * 100);
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    // Initialize icons with hidden state
+    iconItems.forEach(icon => {
+        icon.style.opacity = '0';
+        icon.style.transform = 'scale(0.5)';
+        iconObserver.observe(icon);
+    });
+}
+
+// Function to show detailed information about clicked icon
+function showIconDetails(title, iconClass) {
+    // Create or show modal with detailed information
+    let modal = document.getElementById('icon-details-modal');
+    
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'icon-details-modal';
+        modal.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.95);
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 2px solid var(--primary);
+            z-index: 10000;
+            max-width: 400px;
+            width: 90%;
+            backdrop-filter: blur(10px);
+        `;
+        
+        const closeBtn = document.createElement('button');
+        closeBtn.textContent = '×';
+        closeBtn.style.cssText = `
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+        `;
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+        
+        modal.appendChild(closeBtn);
+        document.body.appendChild(modal);
+    }
+    
+    // Set modal content based on icon
+    const content = getIconDetailsContent(title);
+    modal.innerHTML = `
+        <button style="position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: white; font-size: 2rem; cursor: pointer;">×</button>
+        <div style="text-align: center;">
+            <i class="${iconClass}" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+            <h3 style="color: var(--primary); margin-bottom: 1rem;">${title}</h3>
+            <p style="color: var(--text-secondary); line-height: 1.6;">${content}</p>
+        </div>
+    `;
+    
+    modal.querySelector('button').addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+    
+    modal.style.display = 'block';
+}
+
+// Function to get detailed content for each icon
+function getIconDetailsContent(title) {
+    const contentMap = {
+        'C++ Programming': 'Expertise in object-oriented programming, data structures, and algorithms using C++. Experience in developing high-performance applications and system-level programming.',
+        'Database Management': 'Proficient in SQL database design, optimization, and management. Experience with MySQL, PostgreSQL, and database normalization techniques.',
+        'Telegram Automation': 'Skilled in creating Telegram bots and automation tools using various APIs. Experience in building interactive chat interfaces and automated messaging systems.',
+        'Artificial Intelligence': 'Knowledge of machine learning algorithms, neural networks, and AI concepts. Experience with Python libraries like TensorFlow and scikit-learn.',
+        'Cybersecurity': 'Understanding of security principles, encryption techniques, and network security. Experience in implementing security best practices.',
+        'HTML & CSS': 'Expert in responsive web design, CSS animations, and modern frontend development. Proficient in creating visually appealing and user-friendly interfaces.',
+        'Pharmaceutical Science': 'Background in pharmaceutical studies with understanding of drug interactions, pharmacology, and healthcare systems.',
+        'Python Development': 'Proficient in Python programming for web development, data analysis, and automation. Experience with Django, Flask, and data science libraries.'
+    };
+    
+    return contentMap[title] || `Detailed information about ${title}. This area represents one of my key skills and expertise areas.`;
+}
+
+// Add touch support for mobile devices
+function addTouchSupport() {
+    const iconItems = document.querySelectorAll('.icon-item');
+    
+    iconItems.forEach(icon => {
+        let touchTimeout;
+        
+        icon.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            this.style.transform = 'scale(1.2) translateY(-5px)';
+            
+            // Show tooltip on touch
+            const tooltip = this.nextElementSibling;
+            if (tooltip && tooltip.classList.contains('tooltip')) {
+                tooltip.style.opacity = '1';
+                tooltip.style.visibility = 'visible';
+            }
+            
+            // Set timeout for long press
+            touchTimeout = setTimeout(() => {
+                const tooltipText = this.getAttribute('data-tooltip');
+                const iconClass = this.querySelector('i').className;
+                showIconDetails(tooltipText, iconClass);
+            }, 500);
+        });
+        
+        icon.addEventListener('touchend', function() {
+            clearTimeout(touchTimeout);
+            this.style.transform = 'scale(1) translateY(0)';
+            
+            // Hide tooltip
+            const tooltip = this.nextElementSibling;
+            if (tooltip && tooltip.classList.contains('tooltip')) {
+                tooltip.style.opacity = '0';
+                tooltip.style.visibility = 'hidden';
+            }
+        });
+        
+        icon.addEventListener('touchmove', function() {
+            clearTimeout(touchTimeout);
+        });
+    });
+}
+
+// Initialize touch support
+document.addEventListener('DOMContentLoaded', () => {
+    addTouchSupport();
+});
